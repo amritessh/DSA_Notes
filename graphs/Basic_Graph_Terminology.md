@@ -1,6 +1,6 @@
 Graph is probably the data structure that has the closest resemblance to our daily life. There are many types of graphs describing the relationships in real life.
 
-A Graph is a non-linear data structure consisting of vertices and edges. The vertices are sometimes also referred to as nodes and the edges are lines or arcs that connect any two nodes in the graph. More formally a Graph is composed of a set of vertices( V ) and a set of edges( E ). The graph is denoted by G(V, E).
+A Graph is a non-linear data structure consisting of vertices and edges. The vertices are sometimes also referred to as nodes and the edges are lines or arcs that connect any two nodes in the graph. More formally a Graph is composed of a set of vertices(V) and a set of edges(E). The graph is denoted by G(V, E).
 
 An adjacency matrix is a way of representing a graph as a matrix of boolean (0's and 1's)
 
