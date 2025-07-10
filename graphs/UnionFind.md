@@ -16,7 +16,7 @@ The two most important functions for the “disjoint set” data structure are t
 
 memorize the implementation of “disjoint set with path compression and union by rank”.
 
-# 🎯 Union Find (Disjoint Set) Template
+# 🎯 Union Find Template - Clean Style
 
 ## Overview
 
@@ -24,7 +24,7 @@ memorize the implementation of “disjoint set with path compression and union b
 
 **Main Operations:**
 - `find(x)`: Which set does x belong to?
-- `union_set(x,y)`: Merge the sets containing x and y
+- `unionSet(x,y)`: Merge the sets containing x and y
 
 **Key Optimizations:**
 - **Path Compression**: Makes `find()` nearly O(1)
@@ -39,27 +39,29 @@ memorize the implementation of “disjoint set with path compression and union b
 ```cpp
 class UnionFind {
 private:
-    vector<int> parent;  // parent[i] = parent of node i (if parent[i] == i, then i is root)
-    vector<int> rank;    // rank[i] = approximate depth of tree rooted at i (used for union by rank)
-    int count;           // Number of disjoint sets/components remaining
+    vector<int> root;   // root[i] = root of the tree containing i
+    vector<int> rank;   // rank[i] = approximate size/height of tree rooted at i
+    int count = 0;      // Number of disjoint sets/components remaining
 
 public:
     /**
      * CONSTRUCTOR: Initialize n separate disjoint sets
-     * Initially: each element is its own parent (each element is a separate set)
+     * - root[i] = i: each element is its own root initially
+     * - rank[i] = 1: each single node has rank 1 (tree size)
+     * - count = sz: initially we have 'sz' separate components
      * Time: O(n)
      */
-    UnionFind(int size) {
-        parent.resize(size);
-        rank.resize(size, 0);    // All ranks start at 0 (single nodes have rank 0)
-        count = size;            // Initially we have 'size' separate components
+    UnionFind(int sz) {
+        root.resize(sz);
+        rank.resize(sz);
+        count = sz;
         
-        // Each element is its own parent initially (each is a separate set)
-        for(int i = 0; i < size; i++) {
-            parent[i] = i;
+        for (int i = 0; i < sz; i++) {
+            root[i] = i;    // Each element is its own root initially
+            rank[i] = 1;    // Each single node has rank 1
         }
     }
-
+    
     /**
      * FIND: Find the root/representative of the set containing x
      * OPTIMIZATION: Path Compression - make all nodes on path point directly to root
@@ -75,20 +77,20 @@ public:
      * Time: O(α(n)) amortized (nearly constant)
      */
     int find(int x) {
-        if(parent[x] != x) {
-            // Path compression: make x point directly to root
-            parent[x] = find(parent[x]);
+        if (x == root[x]) {
+            return x;
         }
-        return parent[x];
+        // Path compression: make x point directly to root
+        return root[x] = find(root[x]);
     }
-
+    
     /**
-     * UNION_SET: Merge the sets containing x and y
+     * UNIONSET: Merge the sets containing x and y
      * OPTIMIZATION: Union by Rank - attach smaller tree to larger tree
      * 
      * Why Union by Rank?
      * - Prevents creating long chains which would make find() slow
-     * - Always attach the shorter tree to the taller tree
+     * - Always attach the tree with smaller rank to the tree with larger rank
      * - Keeps overall tree height logarithmic
      * 
      * Cases:
@@ -98,29 +100,29 @@ public:
      * 
      * Time: O(α(n)) amortized
      */
-    void union_set(int x, int y) {
-        int xset = find(x), yset = find(y);
+    void unionSet(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
         
         // Already in same set - no union needed
-        if(xset == yset) return;
-        
-        // Union by rank: attach smaller tree to larger tree
-        if(rank[xset] < rank[yset]) {
-            parent[xset] = yset;        // Make yset the parent of xset
-        } else if(rank[xset] > rank[yset]) {
-            parent[yset] = xset;        // Make xset the parent of yset
-        } else {
-            // Same rank: arbitrarily choose one as parent, increment its rank
-            parent[yset] = xset;
-            rank[xset]++;               // New root's rank increases by 1
+        if (rootX != rootY) {
+            // Union by rank: attach smaller tree to larger tree
+            if (rank[rootX] > rank[rootY]) {
+                root[rootY] = rootX;        // Make rootX the parent of rootY
+            } else if (rank[rootX] < rank[rootY]) {
+                root[rootX] = rootY;        // Make rootY the parent of rootX
+            } else {
+                // Same rank: arbitrarily choose one as parent, increment its rank
+                root[rootY] = rootX;
+                rank[rootX] += 1;           // New root's rank increases by 1
+            }
+            // Two sets merged into one → decrease component count
+            count--;
         }
-        
-        // Two sets merged into one → decrease component count
-        count--;
     }
     
     /**
-     * GET_COUNT: Return number of disjoint sets remaining
+     * GETCOUNT: Return number of disjoint sets remaining
      * Use cases:
      * - Count connected components in a graph
      * - Count number of islands
@@ -128,19 +130,19 @@ public:
      * 
      * Time: O(1)
      */
-    int get_count() {
+    int getCount() {
         return count;
     }
     
     /**
-     * IS_CONNECTED: Check if x and y are in the same set
+     * ISCONNECTED: Check if x and y are in the same set
      * Use cases:
      * - Cycle detection: if we're about to connect two nodes that are already connected
      * - Query if two nodes are reachable from each other
      * 
      * Time: O(α(n)) amortized
      */
-    bool is_connected(int x, int y) {
+    bool isConnected(int x, int y) {
         return find(x) == find(y);
     }
 };
@@ -151,51 +153,147 @@ public:
 ### Pattern 1: Count Connected Components
 
 ```cpp
-UnionFind dsu(n);
-for(auto& edge : edges) {
-    dsu.union_set(edge[0], edge[1]);
-}
-return dsu.get_count();
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        if (isConnected.size() == 0) {
+            return 0;
+        }
+        int n = isConnected.size();
+        UnionFind uf(n);
+        
+        // Optimize: only check upper triangle since matrix is symmetric
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (isConnected[i][j] == 1) {
+                    uf.unionSet(i, j);
+                }
+            }
+        }
+        return uf.getCount();
+    }
+};
 ```
 
 ### Pattern 2: Cycle Detection
 
 ```cpp
-UnionFind dsu(n);
-for(auto& edge : edges) {
-    if(dsu.is_connected(edge[0], edge[1])) {
-        return true;  // Cycle detected
+class Solution {
+public:
+    bool validTree(int n, vector<vector<int>>& edges) {
+        if (edges.size() != n - 1) return false;
+        
+        UnionFind uf(n);
+        for (auto& edge : edges) {
+            if (uf.isConnected(edge[0], edge[1])) {
+                return false;  // Cycle detected
+            }
+            uf.unionSet(edge[0], edge[1]);
+        }
+        return uf.getCount() == 1;
     }
-    dsu.union_set(edge[0], edge[1]);
-}
-return false;
+};
 ```
 
-### Pattern 3: Minimum Spanning Tree (Kruskal's)
+### Pattern 3: Redundant Connection
 
 ```cpp
-sort(edges.begin(), edges.end(), [](const auto& a, const auto& b) {
-    return a[2] < b[2];
-});
-
-UnionFind dsu(n);
-int total_cost = 0;
-for(auto& edge : edges) {
-    if(!dsu.is_connected(edge[0], edge[1])) {
-        dsu.union_set(edge[0], edge[1]);
-        total_cost += edge[2];
+class Solution {
+public:
+    vector<int> findRedundantConnection(vector<vector<int>>& edges) {
+        UnionFind uf(edges.size());
+        
+        for (auto& edge : edges) {
+            if (uf.isConnected(edge[0] - 1, edge[1] - 1)) {
+                return edge;  // This edge creates a cycle
+            }
+            uf.unionSet(edge[0] - 1, edge[1] - 1);
+        }
+        return {};
     }
-}
+};
 ```
 
-### Pattern 4: Dynamic Connectivity
+### Pattern 4: Minimum Spanning Tree (Kruskal's)
 
 ```cpp
-UnionFind dsu(n);
-for(auto& operation : operations) {
-    dsu.union_set(operation[0], operation[1]);
-    results.push_back(dsu.get_count());
-}
+class Solution {
+public:
+    int minCostConnectPoints(vector<vector<int>>& points) {
+        int n = points.size();
+        
+        // Generate all possible edges with their weights
+        vector<array<int, 3>> edges;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int weight = abs(points[i][0] - points[j][0]) + abs(points[i][1] - points[j][1]);
+                edges.push_back({weight, i, j});
+            }
+        }
+        
+        // Sort edges by weight (Kruskal's algorithm)
+        sort(edges.begin(), edges.end());
+        
+        UnionFind uf(n);
+        int totalCost = 0;
+        
+        // Add edges in order of increasing weight
+        for (auto& edge : edges) {
+            int weight = edge[0], u = edge[1], v = edge[2];
+            
+            // Only add edge if it connects different components
+            if (!uf.isConnected(u, v)) {
+                uf.unionSet(u, v);
+                totalCost += weight;
+                
+                // Early termination: MST has exactly n-1 edges
+                if (uf.getCount() == 1) break;
+            }
+        }
+        
+        return totalCost;
+    }
+};
+```
+
+### Pattern 5: Dynamic Connectivity
+
+```cpp
+class Solution {
+public:
+    vector<int> numIslands2(int m, int n, vector<vector<int>>& positions) {
+        UnionFind uf(m * n);
+        vector<vector<bool>> grid(m, vector<bool>(n, false));
+        vector<int> result;
+        
+        int directions[4][2] = {{-1,0}, {1,0}, {0,-1}, {0,1}};
+        
+        for (auto& pos : positions) {
+            int r = pos[0], c = pos[1];
+            
+            if (grid[r][c]) {
+                result.push_back(uf.getCount());
+                continue;
+            }
+            
+            grid[r][c] = true;
+            
+            // Connect to adjacent land cells
+            for (int i = 0; i < 4; i++) {
+                int nr = r + directions[i][0];
+                int nc = c + directions[i][1];
+                
+                if (nr >= 0 && nr < m && nc >= 0 && nc < n && grid[nr][nc]) {
+                    uf.unionSet(r * n + c, nr * n + nc);
+                }
+            }
+            
+            result.push_back(uf.getCount());
+        }
+        
+        return result;
+    }
+};
 ```
 
 ## When to Use Union Find
@@ -223,6 +321,14 @@ Look for these phrases in problems:
 - "Minimum cost to connect all points"
 - "Group elements by some relationship"
 
+## Key Features
+
+1. **Clean Initialization**: Variables initialized at declaration in private section
+2. **Modern C++ Style**: Normal constructor initialization (no initializer lists)
+3. **Path Compression**: Single-line optimization for find()
+4. **Union by Rank**: Keeps trees balanced for optimal performance
+5. **Component Counting**: Automatic tracking of connected components
+
 ## Complexity Analysis
 
 **Time Complexity:** O(α(n)) per operation
@@ -231,7 +337,7 @@ Look for these phrases in problems:
 - So effectively O(1) per operation
 
 **Space Complexity:** O(n)
-- parent array: O(n)
+- root array: O(n)
 - rank array: O(n)
 - Total: O(n)
 
@@ -239,4 +345,3 @@ Look for these phrases in problems:
 - Path compression makes find() nearly O(1)
 - Union by rank keeps trees shallow
 - Together they give nearly constant time per operation
-
