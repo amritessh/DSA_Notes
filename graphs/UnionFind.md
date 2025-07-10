@@ -16,25 +16,21 @@ The two most important functions for the “disjoint set” data structure are t
 
 memorize the implementation of “disjoint set with path compression and union by rank”.
 
-🎯 UNION FIND (DISJOINT SET) TEMPLATE WITH DETAILED EXPLANATIONS
-PURPOSE:
-Efficiently manage disjoint sets and answer connectivity queries.
-
-MAIN OPERATIONS:
-find(x): Which set does x belong to?
-
-union_set(x, y): Merge the sets containing x and y
-
-🔧 KEY OPTIMIZATIONS:
-Path Compression: Makes find() nearly O(1)
-
-Union by Rank: Keeps trees shallow, prevents worst-case O(n) chains
-
-⏱️ TIME & SPACE COMPLEXITY:
-Time Complexity: O(α(n)) per operation, where α is the inverse Ackermann function (nearly constant)
-
-Space Complexity: O(n)
-
+/**
+ * 🎯 UNION FIND (DISJOINT SET) TEMPLATE WITH DETAILED EXPLANATIONS
+ * 
+ * PURPOSE: Efficiently manage disjoint sets and answer connectivity queries
+ * MAIN OPERATIONS: 
+ *   - find(x): Which set does x belong to?
+ *   - union_set(x,y): Merge the sets containing x and y
+ * 
+ * KEY OPTIMIZATIONS:
+ *   - Path Compression: Makes find() nearly O(1)
+ *   - Union by Rank: Keeps trees shallow, prevents worst-case O(n) chains
+ * 
+ * TIME COMPLEXITY: O(α(n)) per operation where α is inverse Ackermann (nearly constant)
+ * SPACE COMPLEXITY: O(n)
+ */
 
 class UnionFind {
 private:
