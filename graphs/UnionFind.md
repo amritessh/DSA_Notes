@@ -40,7 +40,7 @@ memorize the implementation of “disjoint set with path compression and union b
 class UnionFind {
 private:
     vector<int> root;   // root[i] = root of the tree containing i
-    vector<int> rank;   // rank[i] = approximate size/height of tree rooted at i
+    vector<int> rank;   // rank[i] = height of tree rooted at i
     int count = 0;      // Number of disjoint sets/components remaining
 
 public:
@@ -51,16 +51,17 @@ public:
      * - count = sz: initially we have 'sz' separate components
      * Time: O(n)
      */
+
     UnionFind(int sz) {
         root.resize(sz);
-        rank.resize(sz);
+        rank.resize(sz, 0);  // ✅ Initialize to 0 directly, height-based
         count = sz;
         
         for (int i = 0; i < sz; i++) {
-            root[i] = i;    // Each element is its own root initially
-            rank[i] = 1;    // Each single node has rank 1
+            root[i] = i;     // Only need to set root
         }
     }
+    
     
     /**
      * FIND: Find the root/representative of the set containing x
