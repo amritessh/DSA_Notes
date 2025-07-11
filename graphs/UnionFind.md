@@ -47,8 +47,8 @@ public:
     /**
      * CONSTRUCTOR: Initialize n separate disjoint sets
      * - root[i] = i: each element is its own root initially
-     * - rank[i] = 1: each single node has rank 1 (tree size)
-     * - count = sz: initially we have 'sz' separate components
+     * - rank[i] = 0: each single node has rank 0 (tree height)
+     * - count = size: initially we have 'sz' separate components
      * Time: O(n)
      */
 
