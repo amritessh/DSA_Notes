@@ -52,13 +52,12 @@ public:
      * Time: O(n)
      */
 
-    UnionFind(int sz) {
-        root.resize(sz);
-        rank.resize(sz, 0);  // ✅ Initialize to 0 directly, height-based
-        count = sz;
-        
-        for (int i = 0; i < sz; i++) {
-            root[i] = i;     // Only need to set root
+    UnionFind(int size){
+        root.resize(size);
+        rank.resize(size,0);
+        count = size;
+        for(int i = 0 ; i < size; i++){
+            root[i] = i;
         }
     }
     
@@ -77,12 +76,9 @@ public:
      * 
      * Time: O(α(n)) amortized (nearly constant)
      */
-    int find(int x) {
-        if (x == root[x]) {
-            return x;
-        }
-        // Path compression: make x point directly to root
-        return root[x] = find(root[x]);
+    int find(int x){
+        if(root[x]!=x) root[x]=find(root[x]);
+        return root[x];
     }
     
     /**
