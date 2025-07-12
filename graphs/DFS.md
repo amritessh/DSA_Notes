@@ -7,6 +7,7 @@ When we traverse an adjacent vertex, we completely finish the traversal of all v
 
 DFS - Stack
 
+<<<<<<< Updated upstream
 # 🎯 Complete DFS Templates: Recursive & Iterative
 
 ## 🌟 Universal DFS Templates (MEMORIZE THESE!)
@@ -567,3 +568,9 @@ Practice these templates on:
 5. **LeetCode 130** - Surrounded Regions
 
 **Once you memorize these patterns, you'll solve 95% of DFS problems effortlessly!** 🌟
+=======
+The depth-first search algorithm allows us to determine whether two nodes, node x and node y, have a path between them. The DFS algorithm does this by looking at all of the children of the starting node, node x, until it reaches node y. It does this by recursively taking the same steps, again and again, in order to determine if such a path between two nodes even exists.
+
+
+two major points to keep in mind when initiating a graph traversal: first, we can choose any arbitrary node to start our traversal with, since there is no concept of a “root” nodes the way that there are in tree structures. And second, whatever we do, we want to ensure that we don’t repeat any nodes; that is to say, once we “visit” a node, we don’t want to visit it again.
+>>>>>>> Stashed changes

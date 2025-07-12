@@ -13,4 +13,7 @@ https://github.com/ashishps1/awesome-leetcode-resources?tab=readme-ov-file
 https://www.cs.princeton.edu/~wayne/kleinberg-tardos/pdf/UnionFind.pdf
 https://www.cs.cornell.edu/courses/cs6110/2014sp/Handouts/UnionFind.pdf
 
+### DFS - 
+
+https://medium.com/basecs/deep-dive-through-a-graph-dfs-traversal-8177df5d0f13### DFS Travesral -
 
