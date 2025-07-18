@@ -40,7 +40,6 @@ bool dfs(GRAPH_TYPE& graph, int node, VISITED_TYPE& visited, PARAMS...) {
     return false;
 }
 ```
-
 ### 🔥 Iterative DFS Template
 ```cpp
 bool dfsIterative(GRAPH_TYPE& graph, int start, VISITED_TYPE& visited, PARAMS...) {
