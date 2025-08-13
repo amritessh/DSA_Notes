@@ -20,6 +20,12 @@ recursion related space refers to the memory cost that is incurred directly by t
 2. the parameters that are passed to the function call.
 3. the local variables within the function call.
 
+When in doubt, write down the recurrence relationship.
+
+Whenever possible, apply memoization.
+
+When stack overflows, tail recursion might help.
+
 
 
 
