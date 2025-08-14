@@ -26,6 +26,12 @@ Whenever possible, apply memoization.
 
 When stack overflows, tail recursion might help.
 
+Quick sort first selects a value from the list which serves as a pivot value to divide the list into two sublists. One sublist contains all the values that are less than the pivot value, while the other sublist contains the values that are greater than or equal to the pivot value, this is called partitioning. the strategy of choosing a pivot value can vary. 
 
+after partioning, the original list is then reduced into two smaller sublists. we then recursively sort the two sublists. 
+
+we are sure that all elements in one sublists are less or equal than any element in another sublist. Therefore, we can simply concatenate the two sorted sublists that we obtain before to obtain the final sorted list.
+
+Master Theorem, also known as Master Method, provides asymptotic analysis (i.e. the time complexity) for many of the recursion algorithms that follow the pattern of divide-and-conquer.
 
 
