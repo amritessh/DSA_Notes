@@ -1,5 +1,3 @@
-
-
 **Positioning note:** DSA and general HLD/LLD are filter-round gates — companies use them to screen before the role-specific rounds, not because you'll design a URL shortener or a parking lot on the job. Given your target is AI Research / AI Infra / Applied AI, the right allocation is: get DSA and general HLD/LLD to a comfortable, reliable pass bar (not mastery), and put the reclaimed time into AI-specific system design, infra depth, and research output — since that's what actually gets you hired and what the later, role-specific rounds will judge you on. The hours below reflect that shift: general HLD/LLD gets less time than a generic plan would give it, and AI-specific system design (the track added earlier) gets correspondingly more.
 
 **Which resume to use:** You now have two base resumes — an AI resume (leads "Software Engineer, AI Engineer," bullets framed around agent orchestration, evals, RAG) and a SWE resume (leads "Software Engineer," same underlying projects reframed around systems/backend/scale, no AI-specific vocabulary). Default rule:
@@ -8,24 +6,6 @@
 - **SWE resume** → generic "Software Engineer" or "Backend Engineer" postings at companies you're using to widen the funnel, or where the posting explicitly signals a non-AI-specific systems role. Use this sparingly — it's a funnel-widener, not your primary track.
 - When in doubt, use the AI resume. It's the one aligned with your actual positioning goal (breaking out of the generic "AI SWE" bucket), and the SWE resume exists mainly as a fallback for postings where AI-specific framing would read as a mismatch.
 
----
-
-## Daily Weekday Template (16 hours)
-
-| Block | Time | Focus |
-|---|---|---|
-| 1 | 2 hrs | **Research** — multi-agent experiment / self-blindness direction (protected block, first thing) |
-| 2 | 4 hrs | DASH work |
-| 3 | 3 hrs | DSA — patterns + timed problems (floor-level target, not deep mastery) |
-| 4 | 2 hrs | Gym |
-| 5 | 1.5 hrs | General HLD/LLD — filter-round floor (see rotation below) |
-| 6 | 1.5 hrs | **AI-specific system design & infra** — RAG, serving/batching, evals, agent orchestration, your DASH work as case studies |
-| 7 | 1.5 hrs | Applications + networking (tailored, not spray) |
-| 8 | 0.5 hr | Behavioral stories / résumé & LinkedIn / daily review |
-
-Order above is illustrative, not prescriptive — sequence blocks however fits your energy. Keep research and DSA in whichever slots have the most focus, since both degrade fastest with fatigue.
-
-**Gaming:** Since it's occasional rather than daily, don't carve a fixed slot for it — treat it as the thing that fills gaps or caps off a day that went well (e.g. after a good mock, after clearing a DSA session), rather than something competing with the core blocks above. If a session runs long, let it eat into evening slack rather than the research/DSA/system-design blocks.
 
 Weekends: 1 mock interview (DSA or system design, alternate weeks), 3–4 hrs applications, 2–3 hrs AI-specific system design deep dive (this is where the "real company prompts" list gets worked through in full), 2–3 hrs research, gaming/rest fills remaining time.
 
