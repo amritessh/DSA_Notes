@@ -36,8 +36,8 @@ Weekends: 1 mock interview (DSA or system design, alternate weeks), 3–4 hrs ap
 - Mon/Wed/Fri: HLD — one classic design (URL shortener, rate limiter, chat system) per session, aim for "solid, not exhaustive"
 - Tue/Thu: LLD — one OOD problem (parking lot → elevator → vending machine → library management, in that order), full class diagram + interfaces
 - Once you can reliably produce both in ~30 min without freezing (should happen by end of Phase 2), stop adding new general HLD/LLD problems — switch remaining time in this block to review/spaced repetition only, and let the AI-specific block absorb any extra capacity.
-- LLD resources: *Head First Design Patterns*, Educative's "Grokking the Object Oriented Design Interview," or the free [algomaster.io/learn/lld](https://algomaster.io/learn/lld) course / [ashishps1/awesome-low-level-design](https://github.com/ashishps1/awesome-low-level-design) GitHub repo.
-- HLD resources: *System Design Interview* Vol 1 & 2 (Alex Xu), ByteByteGo blog, or [systemdesignschool.io](https://systemdesignschool.io/fundamentals/what-is-system-design-interview) (the site you linked).
+- LLD resource (one, not several): [algomaster.io/learn/lld](https://algomaster.io/learn/lld) — free, structured, covers OOP fundamentals, patterns, and UML end to end. Use this and only this.
+- HLD resource (one, not several): [systemdesignschool.io](https://systemdesignschool.io/fundamentals/what-is-system-design-interview) — already paid for, already structured. Use this and only this.
 
 ---
 
@@ -90,9 +90,8 @@ Weekends: 1 mock interview (DSA or system design, alternate weeks), 3–4 hrs ap
 
 ## Resources
 - **DSA:** NeetCode 150, Blind 75 (as overflow), LeetCode Premium for company-tagged questions
-- **General system design (HLD):** *System Design Interview* Vol 1 & 2 (Alex Xu), ByteByteGo blog
-- **Low-level design (LLD/OOD):** *Head First Design Patterns*, Educative's "Grokking the Object Oriented Design Interview"
-- **LLD fundamentals site (systemdesignschool.io equivalent):** [algomaster.io/learn/lld](https://algomaster.io/learn/lld) — free, structured course covering OOP fundamentals, design principles, patterns, and UML, organized the same way as the HLD site you linked. Backed by the [ashishps1/awesome-low-level-design](https://github.com/ashishps1/awesome-low-level-design) GitHub repo (12k+ stars) if you want the raw problem set + solutions instead of the course wrapper.
+- **General system design (HLD):** [systemdesignschool.io](https://systemdesignschool.io/fundamentals/what-is-system-design-interview) — your one HLD source, already paid for
+- **Low-level design (LLD/OOD):** [algomaster.io/learn/lld](https://algomaster.io/learn/lld) — your one LLD source, free
 - **ML system design:** *Designing Machine Learning Systems* (Chip Huyen), *Machine Learning System Design Interview* (Ali Aminian & Alex Xu)
 - **Mocks:** interviewing.io, Pramp, or peers from your DASH team
 
@@ -126,13 +125,13 @@ These are components to reason about and combine on the fly, not memorize as fix
 
 | Topic | What to actually know | Resource |
 |---|---|---|
-| Scalability basics | Vertical vs horizontal scaling, stateless services, load balancer algorithms (round robin, least connections) | *System Design Interview* Vol 1, ch 1 |
-| Caching | Cache-aside vs write-through vs write-back, eviction policies (LRU/LFU), CDN basics | *System Design Interview* Vol 1, ch 2 + ByteByteGo caching posts |
-| Databases | SQL vs NoSQL tradeoffs, indexing, replication (leader-follower), sharding strategies | *System Design Interview* Vol 1, ch 3-4 |
-| Consistency & availability | CAP theorem in practice, eventual vs strong consistency, quorum reads/writes | *System Design Interview* Vol 2, consistency chapter + *Designing Data-Intensive Applications* (Kleppmann) ch 5 & 9 if you want to go deeper |
-| Message queues | Kafka vs RabbitMQ use cases, pub/sub vs point-to-point, backpressure handling | ByteByteGo "Message Queue" post + *System Design Interview* Vol 2 |
-| Rate limiting | Token bucket, leaky bucket, sliding window counter — tradeoffs, not just names | *System Design Interview* Vol 1, ch 5 (also a good LLD crossover problem) |
-| Classic full designs | URL shortener, chat system (WhatsApp-style), news feed, ride-sharing, job scheduler | *System Design Interview* Vol 1 & 2, one chapter per design |
+| Scalability basics | Vertical vs horizontal scaling, stateless services, load balancer algorithms (round robin, least connections) | systemdesignschool.io — fundamentals module |
+| Caching | Cache-aside vs write-through vs write-back, eviction policies (LRU/LFU), CDN basics | systemdesignschool.io — caching module |
+| Databases | SQL vs NoSQL tradeoffs, indexing, replication (leader-follower), sharding strategies | systemdesignschool.io — databases module |
+| Consistency & availability | CAP theorem in practice, eventual vs strong consistency, quorum reads/writes | systemdesignschool.io — consistency module |
+| Message queues | Kafka vs RabbitMQ use cases, pub/sub vs point-to-point, backpressure handling | systemdesignschool.io — messaging module |
+| Rate limiting | Token bucket, leaky bucket, sliding window counter — tradeoffs, not just names | systemdesignschool.io — rate limiting module (also a good LLD crossover problem) |
+| Classic full designs | URL shortener, chat system (WhatsApp-style), news feed, ride-sharing, job scheduler | systemdesignschool.io — case-study modules |
 
 ### ML System Design — Topics Specific to Your Target Roles
 DASH experience gives you a real edge here — treat these as "explain what I already did" rather than "learn from scratch" wherever possible.
@@ -173,12 +172,12 @@ This is the layer generic SWE/system-design prep won't cover, and it's exactly w
 **How to sequence this within the 8 weeks:** fold this track into your existing ML-infra HLD days (Mon/Wed/Fri) rather than adding a sixth parallel track — by week 3-4 start picking one of the "real company prompts" above per week and doing a full 35-40 min design write-up, same format as your HLD reps.
 | Topic | What to actually know | Resource |
 |---|---|---|
-| Design patterns vocabulary | Strategy, Factory, Singleton, Observer, Decorator, Builder — when to use each, not just definitions | *Head First Design Patterns* |
-| SOLID principles | Be able to critique a design against SOLID out loud during the interview | *Head First Design Patterns* intro chapters + Educative's OOD course |
-| Easy OOD problems | Parking lot, vending machine, library management | Educative's "Grokking the OOD Interview" |
-| Medium OOD problems | Elevator system, tic-tac-toe/chess, rate limiter as a class hierarchy | Educative's "Grokking the OOD Interview" + LeetCode OOD-tagged problems |
-| Harder OOD problems | Chess engine with move validation, ride-sharing matching logic, in-memory cache with eviction as a class design | Educative's "Grokking the OOD Interview" (advanced section) |
-| API design | Designing clean interfaces (REST or RPC-style), versioning, idempotency | *System Design Interview* Vol 2 (short API chapter); otherwise practice from real API design you've done at DASH |
+| Design patterns vocabulary | Strategy, Factory, Singleton, Observer, Decorator, Builder — when to use each, not just definitions | algomaster.io/learn/lld — patterns module |
+| SOLID principles | Be able to critique a design against SOLID out loud during the interview | algomaster.io/learn/lld — principles module |
+| Easy OOD problems | Parking lot, vending machine, library management | algomaster.io/learn/lld — problems section |
+| Medium OOD problems | Elevator system, tic-tac-toe/chess, rate limiter as a class hierarchy | algomaster.io/learn/lld — problems section |
+| Harder OOD problems | Chess engine with move validation, ride-sharing matching logic, in-memory cache with eviction as a class design | algomaster.io/learn/lld — advanced problems |
+| API design | Designing clean interfaces (REST or RPC-style), versioning, idempotency | Practice from real API design you've done at DASH — no separate resource needed |
 
 ## Weekly Tracking (add to this weekly)
 - [ ] LeetCode count + weak patterns
