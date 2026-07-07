@@ -1,6 +1,4 @@
-# 8-Week Interview Prep Plan
-**Target:** AI Research / AI Infra / Applied AI Engineer roles — deliberately stepping away from generic "AI SWE"
-**Constraints:** Weekdays = 4hrs DASH + 2hrs gym + 2hrs research + ~8hrs interview prep (16hr day). Gaming is flexible decompression, not a fixed slot — see note below. Weekends = flexible, use for mocks + deep work + research + gaming.
+
 
 **Positioning note:** DSA and general HLD/LLD are filter-round gates — companies use them to screen before the role-specific rounds, not because you'll design a URL shortener or a parking lot on the job. Given your target is AI Research / AI Infra / Applied AI, the right allocation is: get DSA and general HLD/LLD to a comfortable, reliable pass bar (not mastery), and put the reclaimed time into AI-specific system design, infra depth, and research output — since that's what actually gets you hired and what the later, role-specific rounds will judge you on. The hours below reflect that shift: general HLD/LLD gets less time than a generic plan would give it, and AI-specific system design (the track added earlier) gets correspondingly more.
 
